@@ -37,7 +37,7 @@ install:
   - conda install pip conda-build anaconda-client
 
 script:
-  - conda build --python ${PYTHON_VERSION} -c chogan/label/dev -c conda-forge recipe
+  - conda build --python ${PYTHON_VERSION} -c simpetus -c conda-forge recipe
 
 after_success:
   - chmod +x ./conda_upload.sh
@@ -46,11 +46,5 @@ deploy:
   - provider: script
     script: ./conda_upload.sh main
     on:
-      tags: true
-    skip_cleanup: true
-
-  - provider: script
-    script: ./conda_upload.sh dev
-    on:
-      branch: dev
+      branch: master
     skip_cleanup: true
