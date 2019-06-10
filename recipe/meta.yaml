@@ -1,0 +1,93 @@
+{% set name = "pymeep" %}
+{% set version = "1.9.1.dev" %}
+{% set buildnumber = 29 %}
+# recipe-lint fails if mpi is undefined
+{% set mpi = mpi or 'nompi' %}
+{% if mpi == "nompi" %}
+# prioritize nompi via build number
+{% set buildnumber = buildnumber + 100 %}
+{% endif %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/NanoComp/meep.git
+  git_rev: master
+
+build:
+  number: {{buildnumber}}
+  {% if mpi != "nompi" %}
+  {% set mpi_prefix = "mpi_" + mpi %}
+  {% else %}
+  {% set mpi_prefix = "nompi" %}
+  {% endif %}
+  # add build string so packages can depend on
+  # mpi or nompi variants
+  # dependencies:
+  # `pymeep * mpi_mpich_*` for mpich
+  # `pymeep * mpi_*` for any mpi
+  # `pymeep * nompi_*` for no mpi
+  string: "{{ mpi_prefix }}_py{{ py }}_nomklh{{ PKG_HASH }}_{{ buildnumber }}"
+  run_exports:
+    - {{ name }} * {{ mpi_prefix }}_*
+  features:
+    - nomkl
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}  # [linux]
+    - gfortran_osx-64 4.*  # [osx]
+    - swig 3.0.12
+  host:
+    - guile
+    - pkg-config
+    - {{ mpi }}  # [mpi != 'nompi']
+    - python
+    - libctl >=4.2.0
+    - harminv
+    - mpb >=1.8.0 {{ mpi_prefix }}_*
+    - gsl
+    - hdf5 1.10.4 {{ mpi_prefix }}_*
+    - openblas
+    - numpy 1.11.*
+    - libgdsii >=0.21
+    - mpi4py  # [mpi != 'nompi']
+  run:
+    - {{ mpi }}  # [mpi != 'nompi']
+    - python
+    - libctl
+    - harminv
+    - mpb
+    - numpy >=1.11
+    - openblas
+    - hdf5
+    - gsl
+    - h5utils * {{ mpi_prefix }}_*
+    - h5py * {{ mpi_prefix }}_*
+    - scipy
+    - matplotlib >=2.2
+    - libgdsii >=0.21
+    - mpi4py  # [mpi != 'nompi']
+    - ffmpeg >=4.0
+    - mayavi
+
+test:
+  requires:
+    - parallel
+  imports:
+    - meep
+  source_files:
+    - tests/cyl-ellipsoid-eps-ref.h5
+    - python/tests/*.py
+    - python/tests/data/*
+
+about:
+  home: http:/github.com/NanoComp/meep
+  license: GPL-2.0
+  license_file: LICENSE
+  summary: Free finite-difference time-domain (FDTD) software for electromagnetic simulations
+  doc_url: http://meep.readthedocs.io
+  dev_url: https://github.com/NanoComp/meep
