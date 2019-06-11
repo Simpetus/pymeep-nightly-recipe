@@ -43,9 +43,11 @@ cp $HOME/recipes/pymeep-nightly-recipe/trigger_pymeep.sh $HOME/cron
 # Enter edit mode for your `crontab` file
 crontab -e
 
-# Add this line, which will run `trigger_pymeep.sh` at 8:00 am Monday through Friday,
-# and save the output at $HOME/cron/pymeep-<MONTH>.<DAY>.out
-0 8 * * 1-5 $HOME/cron/trigger_pymeep.sh > "$HOME/cron/pymeep-`date +\%m.\%d`.out" 2>&1
+# Add this line, which will run `trigger_pymeep.sh` at 8:40 am Monday through Friday,
+# and save the output at $HOME/cron/pymeep-<MONTH>.<DAY>.out. This job should start
+# about 20 minutes after the mpb nightly build so it can use the resulting
+# package as a dependency if necessary.
+40 8 * * 1-5 $HOME/cron/trigger_pymeep.sh > "$HOME/cron/pymeep-`date +\%m.\%d`.out" 2>&1
 ```
 
 `trigger_pymeep.sh` will compare the current HEAD of NanoComp/pymeep.git with the contents of `$HOME/cron/latest_pymeep_commit.txt`. If the commits don't match, then it will commit a bumped build number to this repo, which will trigger a Travis build, which will upload the new package.
