@@ -1,6 +1,6 @@
 {% set name = "pymeep" %}
-{% set version = "1.10.1.dev" %}
-{% set buildnumber = 21 %}
+{% set version = "1.11.1.dev" %}
+{% set buildnumber = 0 %}
 # recipe-lint fails if mpi is undefined
 {% set mpi = mpi or 'nompi' %}
 {% if mpi == "nompi" %}
@@ -68,7 +68,7 @@ requirements:
     - h5utils * {{ mpi_prefix }}_*
     - h5py * {{ mpi_prefix }}_*
     - scipy
-    - matplotlib >=2.2
+    - matplotlib >=3.0
     - libgdsii >=0.21
     - mpi4py  # [mpi != 'nompi']
     - ffmpeg >=4.0
