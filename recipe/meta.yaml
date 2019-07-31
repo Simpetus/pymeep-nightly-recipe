@@ -68,7 +68,7 @@ requirements:
     - h5utils * {{ mpi_prefix }}_*
     - h5py * {{ mpi_prefix }}_*
     - scipy
-    - matplotlib >=3.0
+    - matplotlib >=2.2
     - libgdsii >=0.21
     - mpi4py  # [mpi != 'nompi']
     - ffmpeg >=4.0
@@ -85,9 +85,9 @@ test:
     - python/tests/data/*
 
 about:
-  home: http:/github.com/NanoComp/meep
+  home: https:/github.com/NanoComp/meep
   license: GPL-2.0
   license_file: LICENSE
   summary: Free finite-difference time-domain (FDTD) software for electromagnetic simulations
-  doc_url: http://meep.readthedocs.io
+  doc_url: https://meep.readthedocs.io
   dev_url: https://github.com/NanoComp/meep
