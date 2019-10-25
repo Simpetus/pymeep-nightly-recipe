@@ -34,7 +34,7 @@ install:
   - conda update --yes -q conda
   - conda config --set always_yes true
   - conda config --set anaconda_upload no
-  - conda install pip conda-build anaconda-client
+  - conda install pip conda-build anaconda-client ripgrep
 
 script:
   - conda build --python ${PYTHON_VERSION} -c simpetus -c conda-forge recipe
