@@ -8,5 +8,9 @@ if [[ ! -z "$mpi" && "$mpi" != "nompi" ]]; then
         fi
     done
 else
-    OPENBLAS_NUM_THREADS=1 find python/tests -name "*.py" | sed /mpb/d | parallel "$PYTHON {}"
+    # Mac builds are over the 50 minute time limit on Travis. Skip the serial
+    # tests until we find a way to speed things up
+    if [[ $(uname) == Linux ]]; then
+        OPENBLAS_NUM_THREADS==1 find python/tests -name "*.py" | sed /mpb/d | parallel "$PYTHON {}"
+    fi
 fi
