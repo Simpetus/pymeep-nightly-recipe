@@ -52,7 +52,7 @@ requirements:
     - gsl
     - hdf5 1.10.4 {{ mpi_prefix }}_*
     - openblas
-    - numpy 1.11.*
+    - numpy 1.12.*
     - libgdsii >=0.21
     - mpi4py  # [mpi != 'nompi']
   run:
@@ -61,7 +61,7 @@ requirements:
     - libctl
     - harminv
     - mpb
-    - numpy >=1.11
+    - numpy >=1.12
     - openblas
     - hdf5
     - gsl
