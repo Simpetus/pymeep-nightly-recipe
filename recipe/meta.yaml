@@ -1,6 +1,6 @@
 {% set name = "pymeep" %}
-{% set version = "1.13.1.dev" %}
-{% set buildnumber = 36 %}
+{% set version = "1.13.2.dev" %}
+{% set buildnumber = 0 %}
 # recipe-lint fails if mpi is undefined
 {% set mpi = mpi or 'nompi' %}
 {% if mpi == "nompi" %}
@@ -46,9 +46,9 @@ requirements:
     - pkg-config
     - {{ mpi }}  # [mpi != 'nompi']
     - python
-    - libctl >=4.4.0
+    - libctl >=4.5.0
     - harminv
-    - mpb >=1.9.0 {{ mpi_prefix }}_*
+    - mpb >=1.10.0 {{ mpi_prefix }}_*
     - gsl
     - hdf5 1.10.4 {{ mpi_prefix }}_*
     - openblas
