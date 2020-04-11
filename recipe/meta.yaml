@@ -1,6 +1,6 @@
 {% set name = "pymeep" %}
 {% set version = "1.13.2.dev" %}
-{% set buildnumber = 5 %}
+{% set buildnumber = 6 %}
 # recipe-lint fails if mpi is undefined
 {% set mpi = mpi or 'nompi' %}
 {% if mpi == "nompi" %}
