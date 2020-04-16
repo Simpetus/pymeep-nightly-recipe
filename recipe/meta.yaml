@@ -72,6 +72,7 @@ requirements:
     - mpi4py  # [mpi != 'nompi']
     - ffmpeg >=4.0
     - mayavi
+    - autograd
 
 test:
   requires:
