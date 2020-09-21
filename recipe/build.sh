@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -xe
+
 export CPPFLAGS="-I${PREFIX}/include ${CPPFLAGS}"
 
 # We need to install a later MacOS SDK than the default Travis SDK for compatibilty with the Anaconda compilers.
