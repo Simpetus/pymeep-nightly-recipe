@@ -37,9 +37,11 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
-    - swig 3.0.12
+    - swig
+
   host:
     - guile
     - pkg-config
