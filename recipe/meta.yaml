@@ -47,32 +47,33 @@ requirements:
     - pkg-config
     - {{ mpi }}  # [mpi != 'nompi']
     - python
-    - libctl >=4.4.0
+    - libctl
     - harminv
-    - mpb >=1.9.0 {{ mpi_prefix }}_*
+    - mpb * {{ mpi_prefix }}_*
     - gsl
-    - hdf5 1.10.5 {{ mpi_prefix }}_*
-    - openblas
-    - numpy 1.11.*
-    - libgdsii >=0.21
+    - hdf5 * {{ mpi_prefix }}_*
+    #- openblas
+    - numpy 1.16
+    - libgdsii
     - mpi4py  # [mpi != 'nompi']
+
   run:
     - {{ mpi }}  # [mpi != 'nompi']
     - python
     - libctl
     - harminv
-    - mpb
-    - numpy >=1.11
-    - openblas
-    - hdf5
+    - mpb * {{ mpi_prefix }}_*
+    - {{ pin_compatible('numpy') }}
+    #- openblas
+    - hdf5 * {{ mpi_prefix }}_*
     - gsl
-    - h5utils * {{ mpi_prefix }}_*
+    #- h5utils * {{ mpi_prefix }}_*
     - h5py * {{ mpi_prefix }}_*
     - scipy
-    - matplotlib >=2.2
-    - libgdsii >=0.21
+    - matplotlib-base >=2.2
+    - libgdsii
     - mpi4py  # [mpi != 'nompi']
-    - ffmpeg >=4.0
+    - ffmpeg
     - mayavi
     - autograd
 
