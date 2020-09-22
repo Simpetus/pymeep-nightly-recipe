@@ -8,7 +8,7 @@ export CPPFLAGS="-I${PREFIX}/include ${CPPFLAGS}"
 if [[ $(uname) == Darwin ]]; then
     export MACOSX_DEPLOYMENT_TARGET="10.9"
     export LDFLAGS="${LDFLAGS/-Wl,-dead_strip_dylibs/}"
-    if [[ $USER == travis ]]; then
+    if [[ "$HOME" == "/Users/travis" ]]; then
         export CONDA_BUILD_SYSROOT="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk"
         echo "Downloading ${MACOSX_DEPLOYMENT_TARGET} sdk"
         curl -L -O https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz
