@@ -10,6 +10,48 @@ matrix:
         - CONDA_PLATFORM=Linux-x86_64
         - CFG_PREFIX=linux_64
         - MPI=nompi
+    - os: linux
+      dist: trusty
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.7
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=nompi
+    - os: linux
+      dist: trusty
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.8
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=nompi
+
+    - os: linux
+      dist: trusty
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.6
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=mpich
+    - os: linux
+      dist: trusty
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.7
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=mpich
+    - os: linux
+      dist: trusty
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.8
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=mpich
+
 
     - os: osx
       env:
@@ -17,33 +59,38 @@ matrix:
         - CONDA_PLATFORM=MacOSX-x86_64
         - CFG_PREFIX=osx_64
         - MPI=nompi
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.7
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=nompi
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.8
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=nompi
 
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.6
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=mpich
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.7
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=mpich
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.8
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=mpich
 
-
-    # - os: linux
-    #   dist: trusty
-    #   sudo: false
-    #   env:
-    #     - PYTHON_VERSION=2.7
-    #   before_install:
-    #     - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    # - os: osx
-    #   env:
-    #     - PYTHON_VERSION=2.7
-    #   before_install:
-    #     - wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
-    # - os: linux
-    #   dist: trusty
-    #   sudo: false
-    #   env:
-    #     - PYTHON_VERSION=3.6
-    #   before_install:
-    #     - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    # - os: osx
-    #   env:
-    #     - PYTHON_VERSION=3.6
-    #   before_install:
-    #     - wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
 
 install:
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-${CONDA_PLATFORM}.sh -O miniconda.sh
