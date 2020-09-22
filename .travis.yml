@@ -56,7 +56,7 @@ install:
   - conda install pip conda-build anaconda-client ripgrep
 
 script:
-  - conda build -m ./conda_configs/${CFG_PREFIX}_mpi${MPI}python${PYTHON_VERSION}.____cpython.yaml --python ${PYTHON_VERSION} -c simpetus -c conda-forge recipe
+  - conda build -m ./conda-configs/${CFG_PREFIX}_mpi${MPI}python${PYTHON_VERSION}.____cpython.yaml --python ${PYTHON_VERSION} -c simpetus -c conda-forge recipe
 
 after_success:
   - chmod +x ./conda_upload.sh
