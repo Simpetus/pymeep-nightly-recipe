@@ -41,10 +41,12 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - swig
+    - automake
+    - make
+    - pkg-config
 
   host:
     - guile
-    - pkg-config
     - {{ mpi }}  # [mpi != 'nompi']
     - python
     - libctl
