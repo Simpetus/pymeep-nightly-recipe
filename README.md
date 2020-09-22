@@ -15,3 +15,4 @@ Whenever a new official `Meep` tarball is released on GitHub, `recipe/meta.yaml`
 ## Travis Cron Jobs
 
 Every day, Travis CI will  run the job in https://github.com/Simpetus/trigger-nightly-builds. It will check for updates to meep, and automatically push to this repository, bumping the `buildnumber`, if it finds any. That will in turn trigger a new package upload when CI for this repo runs. Manual updating is only required when a new version of meep is released.
+
