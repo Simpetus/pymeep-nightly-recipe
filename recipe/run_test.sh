@@ -1,9 +1,13 @@
 #!/bin/bash
 
+echo "**** run_test.sh starting"
+echo "**** mpi: $mpi"
+echo "**** python: $($PYTHON --version)"
+
 if [[ ! -z "$mpi" && "$mpi" != "nompi" ]]; then
     for t in python/tests/*.py; do
         if [ "$(basename $t)" != "material_dispersion.py" -a "$(basename $t)" != "mpb.py" ]; then
-            echo "Running $(basename $t)"
+            echo "**** Running $(basename $t)"
             OPENBLAS_NUM_THREADS=1 ${PREFIX}/bin/mpiexec -n 2 $PYTHON $t
         fi
     done
@@ -12,8 +16,12 @@ else
     # tests until we find a way to speed things up
     if [[ $(uname) == Linux ]]; then
         # OPENBLAS_NUM_THREADS=1 find python/tests -name "*.py" | sed /mpb/d | parallel -v "$PYTHON {}"
+        # OPENBLAS_NUM_THREADS=1  $PYTHON -m pytest $(find python/tests -name "*.py" | sed /mpb/d)
 
-        OPENBLAS_NUM_THREADS=1  $PYTHON -m pytest $(find python/tests -name "*.py" | sed /mpb/d)
+        for t in $(find python/tests -name "*.py" | sed /mpb/d); do
+            echo "**** Running $(basename $t)"
+            OPENBLAS_NUM_THREADS=1 $PYTHON $t
+        done
 
     fi
 fi
