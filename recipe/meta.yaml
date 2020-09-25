@@ -82,6 +82,7 @@ requirements:
 test:
   requires:
     - parallel
+    - pytest
   imports:
     - meep
   source_files:
