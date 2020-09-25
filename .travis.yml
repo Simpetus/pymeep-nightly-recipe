@@ -3,31 +3,97 @@ language: generic
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: xenial
       sudo: false
       env:
-        - PYTHON_VERSION=2.7
-      before_install:
-        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    - os: osx
-      env:
-        - PYTHON_VERSION=2.7
-      before_install:
-        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+        - PYTHON_VERSION=3.6
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=nompi
     - os: linux
-      dist: trusty
+      dist: xenial
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.7
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=nompi
+    - os: linux
+      dist: xenial
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.8
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=nompi
+
+    - os: linux
+      dist: xenial
       sudo: false
       env:
         - PYTHON_VERSION=3.6
-      before_install:
-        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=mpich
+    - os: linux
+      dist: xenial
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.7
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=mpich
+    - os: linux
+      dist: xenial
+      sudo: false
+      env:
+        - PYTHON_VERSION=3.8
+        - CONDA_PLATFORM=Linux-x86_64
+        - CFG_PREFIX=linux_64
+        - MPI=mpich
+
+
     - os: osx
       env:
         - PYTHON_VERSION=3.6
-      before_install:
-        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=nompi
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.7
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=nompi
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.8
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=nompi
+
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.6
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=mpich
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.7
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=mpich
+    - os: osx
+      env:
+        - PYTHON_VERSION=3.8
+        - CONDA_PLATFORM=MacOSX-x86_64
+        - CFG_PREFIX=osx_64
+        - MPI=mpich
+
 
 install:
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-${CONDA_PLATFORM}.sh -O miniconda.sh
   - chmod +x miniconda.sh
   - ./miniconda.sh -b -p $HOME/miniconda
   - export PATH=$HOME/miniconda/bin:$PATH
@@ -37,7 +103,7 @@ install:
   - conda install pip conda-build anaconda-client ripgrep
 
 script:
-  - conda build --python ${PYTHON_VERSION} -c simpetus -c conda-forge recipe
+  - conda build -m ./conda-configs/${CFG_PREFIX}_mpi${MPI}python${PYTHON_VERSION}.____cpython.yaml --python ${PYTHON_VERSION} -c simpetus -c conda-forge recipe
 
 after_success:
   - chmod +x ./conda_upload.sh
