@@ -16,7 +16,6 @@ else
     # tests until we find a way to speed things up
     if [[ $(uname) == Linux ]]; then
         # OPENBLAS_NUM_THREADS=1 find python/tests -name "*.py" | sed /mpb/d | parallel -v "$PYTHON {}"
-        # OPENBLAS_NUM_THREADS=1  $PYTHON -m pytest $(find python/tests -name "*.py" | sed /mpb/d)
 
         for t in $(find python/tests -name "*.py" | sed /mpb/d); do
             echo "**** Running $(basename $t)"
