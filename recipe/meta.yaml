@@ -91,7 +91,7 @@ test:
 
 about:
   home: https:/github.com/NanoComp/meep
-  license: GPL-2.0
+  license: GPL-2.0-or-later
   license_file: LICENSE
   summary: Free finite-difference time-domain (FDTD) software for electromagnetic simulations
   doc_url: https://meep.readthedocs.io
