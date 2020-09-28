@@ -40,13 +40,17 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
-
-  host:
     - guile
     - swig
+    - autoconf
     - automake
-    - make
+    - m4
+    - libtool
     - pkg-config
+    - make
+
+
+  host:
     - {{ mpi }}  # [mpi != 'nompi']
     - python
     - libctl
