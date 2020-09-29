@@ -1,6 +1,6 @@
 {% set name = "pymeep" %}
 {% set version = "1.15.1.dev" %}
-{% set buildnumber = 23 %}
+{% set buildnumber = 24 %}
 # recipe-lint fails if mpi is undefined
 {% set mpi = mpi or 'nompi' %}
 {% if mpi == "nompi" %}
@@ -17,7 +17,7 @@ source:
   git_rev: master
 
 build:
-  number: {{buildnumber}}
+  number: {{ buildnumber }}
   {% if mpi != "nompi" %}
   {% set mpi_prefix = "mpi_" + mpi %}
   {% else %}
@@ -40,21 +40,24 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
-
-  host:
     - guile
     - swig
+    - autoconf
     - automake
-    - make
+    - m4
+    - libtool
     - pkg-config
+    - make
+
+
+  host:
     - {{ mpi }}  # [mpi != 'nompi']
     - python
-    - libctl
+    - libctl >=4.5
     - harminv
-    - mpb * {{ mpi_prefix }}_*
+    - mpb >=1.10.0 {{ mpi_prefix }}_*
     - gsl
-    - hdf5 * {{ mpi_prefix }}_*
-    #- openblas
+    - hdf5 1.10.5 {{ mpi_prefix }}_*
     - numpy 1.16
     - libgdsii
     - mpi4py  # [mpi != 'nompi']
@@ -62,14 +65,12 @@ requirements:
   run:
     - {{ mpi }}  # [mpi != 'nompi']
     - python
-    - libctl
+    - libctl >=4.5
     - harminv
-    - mpb * {{ mpi_prefix }}_*
+    - mpb >=1.10.0 {{ mpi_prefix }}_*
     - {{ pin_compatible('numpy') }}
-    #- openblas
     - hdf5 * {{ mpi_prefix }}_*
     - gsl
-    #- h5utils * {{ mpi_prefix }}_*
     - h5py * {{ mpi_prefix }}_*
     - scipy
     - matplotlib-base >=2.2
@@ -91,7 +92,7 @@ test:
 
 about:
   home: https:/github.com/NanoComp/meep
-  license: GPL-2.0
+  license: GPL-2.0-or-later
   license_file: LICENSE
   summary: Free finite-difference time-domain (FDTD) software for electromagnetic simulations
   doc_url: https://meep.readthedocs.io
