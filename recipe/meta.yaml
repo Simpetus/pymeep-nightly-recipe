@@ -53,12 +53,11 @@ requirements:
   host:
     - {{ mpi }}  # [mpi != 'nompi']
     - python
-    - libctl
+    - libctl >=4.5
     - harminv
-    - mpb * {{ mpi_prefix }}_*
+    - mpb >=1.10.0 {{ mpi_prefix }}_*
     - gsl
-    - hdf5 * {{ mpi_prefix }}_*
-    #- openblas
+    - hdf5 1.10.5 {{ mpi_prefix }}_*
     - numpy 1.16
     - libgdsii
     - mpi4py  # [mpi != 'nompi']
@@ -66,14 +65,12 @@ requirements:
   run:
     - {{ mpi }}  # [mpi != 'nompi']
     - python
-    - libctl
+    - libctl >=4.5
     - harminv
-    - mpb * {{ mpi_prefix }}_*
+    - mpb >=1.10.0 {{ mpi_prefix }}_*
     - {{ pin_compatible('numpy') }}
-    #- openblas
     - hdf5 * {{ mpi_prefix }}_*
     - gsl
-    #- h5utils * {{ mpi_prefix }}_*
     - h5py * {{ mpi_prefix }}_*
     - scipy
     - matplotlib-base >=2.2
