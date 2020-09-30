@@ -1,6 +1,6 @@
 {% set name = "pymeep" %}
 {% set version = "1.15.1.dev" %}
-{% set buildnumber = 24 %}
+{% set buildnumber = 25 %}
 # recipe-lint fails if mpi is undefined
 {% set mpi = mpi or 'nompi' %}
 {% if mpi == "nompi" %}
@@ -81,8 +81,6 @@ requirements:
     - autograd
 
 test:
-  requires:
-    - parallel
   imports:
     - meep
   source_files:

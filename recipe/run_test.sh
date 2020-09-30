@@ -26,11 +26,9 @@ else
     # Mac builds are over the 50 minute time limit on Travis. Skip the serial
     # tests until we find a way to speed things up
     if [[ $(uname) == Linux ]]; then
-        export OPENBLAS_NUM_THREADS=1
-        export OMP_NUM_THREADS=1
         for t in $(find python/tests -name "*.py" | sed /mpb/d); do
             echo "Running $(basename $t)"
-            $PYTHON $t
+            OPENBLAS_NUM_THREADS=1 $PYTHON $t
         done
     else
         echo "Skipping NOMPI tests on OSX."
