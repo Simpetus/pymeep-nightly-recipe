@@ -54,7 +54,7 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
     - python
     - libctl >=4.5
-    - harminv
+    - harminv 1.4.1
     - mpb >=1.10.0 {{ mpi_prefix }}_*
     - gsl
     - hdf5 1.10.5 {{ mpi_prefix }}_*
@@ -66,7 +66,7 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
     - python
     - libctl >=4.5
-    - harminv
+    - harminv 1.4.1
     - mpb >=1.10.0 {{ mpi_prefix }}_*
     - {{ pin_compatible('numpy') }}
     - hdf5 * {{ mpi_prefix }}_*
