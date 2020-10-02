@@ -22,7 +22,7 @@ matrix:
       env:
         - PYTHON_VERSION=3.8
         - CONDA_PLATFORM=Linux-x86_64
-
+        - SKIP_TESTS_NOMPI=yes
 
     - os: osx
       env:
