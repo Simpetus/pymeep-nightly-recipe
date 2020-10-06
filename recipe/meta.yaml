@@ -1,6 +1,6 @@
 {% set name = "pymeep" %}
 {% set version = "1.15.1.dev" %}
-{% set buildnumber = 26 %}
+{% set buildnumber = 27 %}
 # recipe-lint fails if mpi is undefined
 {% set mpi = mpi or 'nompi' %}
 {% if mpi == "nompi" %}
@@ -69,8 +69,9 @@ requirements:
     - harminv
     - mpb >=1.10.0 {{ mpi_prefix }}_*
     - {{ pin_compatible('numpy') }}
-    - hdf5 * {{ mpi_prefix }}_*
+    - hdf5 1.10.5 {{ mpi_prefix }}_*
     - gsl
+    - h5utils * {{ mpi_prefix }}_*
     - h5py * {{ mpi_prefix }}_*
     - scipy
     - matplotlib-base >=2.2
